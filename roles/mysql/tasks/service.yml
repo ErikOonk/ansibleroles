@@ -1,0 +1,4 @@
+---
+# start the apache webserver
+- name: start mysql
+  service: name=mysql state=started enabled=yes

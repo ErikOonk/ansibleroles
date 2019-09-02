@@ -1,0 +1,42 @@
+---
+# tasks file for default
+#
+# Make a password like this:
+# python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+#
+- name: Install required software
+  apt:
+    name:
+      - libuser
+      - postfix
+
+- name: Workarounds
+  copy:
+    content: ""
+    dest: /etc/libuser.conf
+    force: no
+    
+- name: Add default users
+  user:
+   name: beheer
+   comment: 'CFIT beheer account'
+   local: yes
+   password: '{{ beheer_pw }}'
+   #password: '$6$rounds=656000$2EODfotPybgpt5oT$13Y5TCBrW073YiXhOl7YeTyqU8DcEvQIE/lD3vp.hrpb3OBIVjr2rAuoSYJ8Bjv0nNQf7GNMgUmLr3SegHyLR.'
+   state: present
+
+- name: Set root password
+  user: 
+    name: root
+    password: '{{ root_pw }}'
+  when: ansible_hostname == "ubuntu01"
+
+- name: Set root environment
+  copy: src={{ item.in }} dest={{ item.out }} owner=root group=root mode=0644
+  with_items:
+    - { in: 'root_bash_profile', out: '/root/.profile' }
+    - { in: 'root_bashrc', out: '/root/.bashrc' }
+ 
+
+- import_tasks: ufw.yml
+- import_tasks: hardening.yml

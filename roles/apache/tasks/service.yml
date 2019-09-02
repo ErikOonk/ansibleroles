@@ -1,0 +1,4 @@
+---
+# start the apache webserver
+- name: start apache
+  service: name=apache2 state=started enabled=yes

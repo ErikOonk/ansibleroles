@@ -1,0 +1,4 @@
+---
+# vars file for mysql
+current_root_pw: blabla
+new_root_pw: blabla

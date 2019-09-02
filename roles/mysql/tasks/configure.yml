@@ -1,0 +1,11 @@
+---
+# Configure the mysql database server
+- name: configure mysql
+  copy: src=mysqld.cnf dest=/etc/mysql/mysql.conf.d/mysqld.cnf
+  #copy: src=root.my.cnf dest=/root/.my.cnf
+  notify:
+    - restart mysql
+
+- name: set mysql root password
+  mysql_user: name=root password={{ new_root_pw }} check_implicit_admin=yes login_user=root login_password={{ current_root_pw }} state=present
+

@@ -1,0 +1,11 @@
+---
+# Install the apache webserver
+- name: install apache
+  apt: 
+    name:
+      - apache2
+      - php
+      - libapache2-mod-php
+      - php-mcrypt
+    state: present
+    autoclean: yes

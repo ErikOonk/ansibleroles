@@ -1,0 +1,11 @@
+---
+# Install mysql
+- name: install mysql
+  apt:
+    name:
+      - mysql-server
+      - python-mysqldb
+      - php-mysql
+    state: present
+    autoclean: yes
+    update_cache: yes
