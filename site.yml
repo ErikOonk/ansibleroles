@@ -4,16 +4,7 @@
 #    - apache
 #    - ntp
 
-- hosts: ubuntu01
-  roles:
-    - role: default
-      become: yes
-    - role: apache
-      become: yes
-    - role: mysql
-      become: yes
-
-- hosts: ubuntu02
+- hosts: all
   roles:
     - role: default
       become: yes
